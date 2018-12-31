@@ -2,10 +2,7 @@
 <head>
 
 <?php
-
-
-
-
+	
 include_once 'db1.php';
 
 $Name=$_POST['nm'];
@@ -23,7 +20,7 @@ $result = mysqli_query($con,$query);
  
 if ( mysqli_num_rows ($result ) > 0 )
 {
-    /* Username already exists */
+   
     echo "<script type='text/javascript'>alert('Name already exists...');</script>";
     include "register.php";
 }
@@ -44,11 +41,6 @@ if(empty($Name&&$Address&&$DOB&&$Gender&&$Education_qualified&&$Timing&&$Contact
 	echo "<script type='text/javascript'>alert('Fillup all the details..!!');</script>";
 	include "register.php";	
 }
-
-	
-	
-
-
 
 ?>
 </head>
