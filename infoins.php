@@ -2,7 +2,7 @@
 <head>
 
 <?php
-	
+
 include_once 'db1.php';
 
 $Name=$_POST['nm'];
@@ -14,15 +14,31 @@ $Timing=$_POST['time'];
 $Contact_No=$_POST['cont'];
 $Course=$_POST['course'];
 
+if(empty($Name&&$Address&&$DOB&&$Gender&&$Education_qualified&&$Timing&&$Contact_No&&$Course))
+{
+	
+	echo "<script type='text/javascript'>alert('Fillup all the details..!!');</script>";
+	include "register.php";	
+	exit;
+}
+
+
+
 $query = "SELECT * FROM `reg` WHERE `Name` = '{$Name}'";
+$query1 = "SELECT * FROM `reg` WHERE `Contact_No` = '{$Contact_No}'";
  
 $result = mysqli_query($con,$query);
- 
-if ( mysqli_num_rows ($result ) > 0 )
+$result1 = mysqli_query($con,$query1);
+
+if ( mysqli_num_rows ($result )> 0 )
 {
-   
-    echo "<script type='text/javascript'>alert('Name already exists...');</script>";
+
+	if(mysqli_num_rows ($result1 )>0)
+	{
+    /* Name and Contact number already exists */
+    echo "<script type='text/javascript'>alert('Name and contact number already exists...');</script>";
     include "register.php";
+    }
 }
 else
 {
@@ -31,15 +47,6 @@ else
 	include "image.php";
 
 
-}
-
-
-
-if(empty($Name&&$Address&&$DOB&&$Gender&&$Education_qualified&&$Timing&&$Contact_No&&$Course))
-{
-	
-	echo "<script type='text/javascript'>alert('Fillup all the details..!!');</script>";
-	include "register.php";	
 }
 
 ?>
